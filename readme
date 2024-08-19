@@ -1,0 +1,41 @@
+spotify-clike
+=============
+
+One-shot binary to "like" now playing song on Ppotify.
+
+I terribly miss such a hotkey in default macOS client.
+So I wrote this small app, and bound it to a hotkey using Karabiner.
+
+Add the following piece into "~/.config/karabiner/karabiner.json"
+under $.profiles.complex_modifications.rules:
+
+{
+    "description": "Like current spotify track: Global + Control + L",
+    "type": "basic",
+    "from": {
+        "key_code": "l",
+        "modifiers": {
+            "mandatory": [
+                "left_control",
+                "fn"
+            ],
+            "optional": [
+                "any"
+            ]
+        }
+    },
+    "to": [ { "shell_command": "/Users/alex/go/bin/spotify-clike" } ]
+}
+
+
+How to use:
+==========
+
+1. register an application, and set its keys in "credentials/credentials.go" file.
+
+2. run "go run auth/auth.go", follow the given link, and authorize your account.
+The refresh token will be stored in ~/.spotify-token.json.
+
+3. "go install" it, assign a hot-key, shell alias, or whatever you like.
+
+4. like hundreds of tracks to properly taught Spotify's AI of your music taste.
